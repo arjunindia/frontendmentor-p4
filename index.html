@@ -1,39 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Interactive pricing component</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <title>Frontend Mentor | Interactive pricing component</title>
 
-  Simple, traffic-based pricing
-  Sign-up for our 30-day trial. No credit card required. 
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      body {
+        background-image: url("./images/bg-pattern.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      header {
+        padding: 5vh 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      body,
+      h1 {
+        margin: 0;
+      }
+      .component {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .c {
+        width: 40vw;
+        background-color: white;
+        padding: 1rem;
+      }
+      .cost {
+        font-size: 2rem;
+        font-weight: 800;
+      }
+      .pps {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .slidecontainer {
+        grid-column: span 2;
+      }
+      .slider {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 6px;
+        background: #a5f3eb;
+        border-radius: 3px;
+        width: 100%;
+      }
+      .slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 0;
+        background: url("./images/icon-slider.svg") no-repeat center / cover;
+        cursor: ew-resize;
+        background-size: 60%;
+        background-color: hsl(174, 86%, 45%);
+        box-shadow: 0 5px 10px rgba(16, 213, 193, 0.768);
+      }
 
-  Pageviews
-  $ /month
+      .slider::-moz-range-thumb {
+        appearance: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 0;
+        background: url("./images/icon-slider.svg") no-repeat center / cover;
+        cursor: ew-resize;
+        background-size: 60%;
+        background-color: hsl(174, 86%, 45%);
+        box-shadow: 0 5px 10px rgba(16, 213, 193, 0.768);
+      }
 
-  Monthly Billing
-  Yearly Billing 25% discount
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
 
-  Unlimited websites
-  100% data ownership
-  Email reports
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
 
-  Start my trial
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+      .slidersw {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      .slidersw:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      input:checked + .slidersw {
+        background-color: hsl(174, 77%, 80%);
+      }
+
+      input:focus + .slidersw {
+        box-shadow: 0 0 1px hsl(174, 77%, 80%);
+      }
+
+      input:checked + .slidersw:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slidersw.round {
+        border-radius: 34px;
+      }
+
+      .slidersw.round:before {
+        border-radius: 50%;
+      }
+      .my {
+        padding: 1rem;
+        justify-content: center;
+        font-size: 12px;
+      }
+      .flex {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .attribution {
+        position: absolute;
+        z-index: -9999;
+        bottom: 0;
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+      @media screen and (max-width: 50rem) {
+        .c {
+          width: 90vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Simple, traffic-based pricing</h1>
+      <p>Sign-up for our 30-day trial. No credit card required.</p>
+    </header>
+    <div class="component">
+      <div class="c">
+        <div class="pps">
+          <p class="pageviews">100k Pageviews</p>
+          <p class="pricing"><span class="cost">$16.00</span>/month</p>
+          <div class="slidecontainer">
+            <input
+              type="range"
+              min="1"
+              max="36"
+              value="16"
+              class="slider"
+              id="myRange"
+            />
+          </div>
+        </div>
+        <div class="my flex">
+          <p>Monthly Billing</p>
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slidersw round"></span>
+          </label>
+
+          <p>Yearly Billing</p>
+          <p class="dis">25% discount</p>
+        </div>
+        <div class="fnb flex">
+          <div class="features">
+            <div class="flex">
+              <img src="./images/icon-check.svg" alt="" />
+              <p>Unlimited websites</p>
+            </div>
+            <div class="flex">
+              <img src="./images/icon-check.svg" alt="" />
+              <p>100% data ownership</p>
+            </div>
+            <div class="flex">
+              <img src="./images/icon-check.svg" alt="" />
+              <p>Email reports</p>
+            </div>
+          </div>
+          <button>Start my trial</button>
+        </div>
+      </div>
+    </div>
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </body>
 </html>

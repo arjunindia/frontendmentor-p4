@@ -36,3 +36,7 @@ The designs were created to the following widths:
 
 - Family: [Manrope](https://fonts.google.com/specimen/Manrope)
 - Weights: 600, 800
+
+![h](./design/desktop-design.jpg)
+
+![h](./design/mobile-design.jpg)
